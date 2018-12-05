@@ -9,9 +9,11 @@ namespace ViewModels
     public class MainViewModel
     {
         public MenuViewModel MenuViewModel { get; set; }
+        public ImageViewModel ImageViewModel { get; set; }
         public MainViewModel()
         {
             MenuViewModel = new MenuViewModel();
+            ImageViewModel = new ImageViewModel();
         }
     }
 }

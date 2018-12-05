@@ -11,13 +11,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
-
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-     
+            <ColumnDefinition Width="45*"></ColumnDefinition>
+            <ColumnDefinition Width="30*"></ColumnDefinition>
+            <ColumnDefinition Width="25*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <local:MenuView
             Grid.Row = "0"
+            Grid.ColumnSpan="3"
             x:Name="MenuView" 
             x:FieldModifier="private" 
             DataContext="{Binding Path=MenuViewModel, Mode=OneTime}"
