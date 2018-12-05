@@ -5,10 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using PixelMapSharp;
 
+
 namespace Models
 {
     public class BitmapManager
     {
         public PixelMap PixelMap { get; set; }
+
+        public BitmapManager()
+        {
+        }
+
+        public void SetImage(string path)
+        {
+            PixelMap = PixelMap.SlowLoad(new System.Drawing.Bitmap(path));
+        }
     }
 }
