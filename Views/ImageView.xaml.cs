@@ -21,7 +21,7 @@ namespace Views
     /// </summary>
     public partial class ImageView : UserControl
     {
-        private ImageViewModel _canvasViewModel;
+        private ImageViewModel _imageViewModel;
 
         public ImageView()
         {
@@ -33,7 +33,7 @@ namespace Views
         private void HandleDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             // Store a reference to the ViewModel.
-            _canvasViewModel = base.DataContext as ImageViewModel;
+            _imageViewModel = base.DataContext as ImageViewModel;
         }
     }
 }

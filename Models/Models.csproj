@@ -38,6 +38,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MvvmFoundation.Wpf">
+      <HintPath>..\GKLab3\MvvmFoundation.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="PixelMap, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PixelMap.1.0.1\lib\PixelMap.dll</HintPath>
     </Reference>
@@ -61,6 +64,7 @@
     <Compile Include="BitmapManager.cs" />
     <Compile Include="FilteringManager.cs" />
     <Compile Include="Filters\IFilteringStrategy.cs" />
+    <Compile Include="LibrariesConverters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -83,6 +87,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\normal_map.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

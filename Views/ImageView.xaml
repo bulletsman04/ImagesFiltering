@@ -10,7 +10,7 @@
         <Image 
             Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}, Mode=FindAncestor}}" 
             Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type Grid}, Mode=FindAncestor}}" 
-            Source="{Binding WorkingArea.ImageSource, Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Name="Area"
+            Source="{Binding ImageSource, Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Name="Area"
             Stretch="UniformToFill"
         >
         </Image>

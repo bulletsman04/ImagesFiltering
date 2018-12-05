@@ -25,5 +25,12 @@
             DataContext="{Binding Path=MenuViewModel, Mode=OneTime}"
             Height="25"
         />
+        <local:ImageView
+            Grid.Row = "1"
+            Grid.Column="0"
+            x:Name="ImageView" 
+            x:FieldModifier="private" 
+            DataContext="{Binding Path=ImageViewModel, Mode=OneTime}"
+        />
     </Grid>
 </UserControl>
