@@ -20,7 +20,6 @@ namespace Models
             set
             {
                 _filteringStrategy = value;
-                Filter();
             }
         }
 
@@ -35,6 +34,7 @@ namespace Models
 
         public void Filter()
         {
+            _bitmapManager.ResetPixelMap();
             FilteringStrategy?.Execute(_bitmapManager.PixelMap, FilteringArea);
             _bitmapManager.PixelMap = _bitmapManager.PixelMap;
         }

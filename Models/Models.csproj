@@ -72,7 +72,7 @@
     <Compile Include="Filters\GammaFilteringStrategy.cs" />
     <Compile Include="Filters\IFilteringStrategy.cs" />
     <Compile Include="Filters\NegationFilteringStrategy.cs" />
-    <Compile Include="LibrariesConverters.cs" />
+    <Compile Include="TypesConverters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -98,6 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\normal_map.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\landscape.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

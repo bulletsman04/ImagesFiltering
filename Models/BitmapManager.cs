@@ -14,6 +14,7 @@ namespace Models
     public class BitmapManager: ObservableObject
     {
         private PixelMap _pixelMap;
+        private Bitmap _startingBitmap;
         public PixelMap PixelMap
         {
             get => _pixelMap;
@@ -30,14 +31,19 @@ namespace Models
         {
             Width = 450;
             Height = 600;
-            SetImage(Resources.normal_map);
+            SetImage(Resources.landscape);
         }
 
         public void SetImage(Image image)
         {
-            PixelMap = PixelMap.SlowLoad(new System.Drawing.Bitmap(image,Width,Height));
+            _startingBitmap = new System.Drawing.Bitmap(image, Width, Height);
+            PixelMap = PixelMap.SlowLoad(_startingBitmap);
         }
 
+        public void ResetPixelMap()
+        {
+            PixelMap = PixelMap.SlowLoad(_startingBitmap);
+        }
        
     }
 }

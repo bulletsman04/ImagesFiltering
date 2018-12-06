@@ -36,6 +36,11 @@
                 <RowDefinition Height="30*" />
                 <RowDefinition Height="40*" />
             </Grid.RowDefinitions>
+            <local:ActionsView
+                Grid.Row="0"
+                x:Name="ActionsView"
+                x:FieldModifier="private"
+                DataContext="{Binding Path=ActionsViewModel, Mode=OneTime}" />
             <local:FiltersView
                 Grid.Row="1"
                 x:Name="FiltersView"

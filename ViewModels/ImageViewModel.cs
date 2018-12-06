@@ -41,7 +41,7 @@ namespace ViewModels
 
         private void BitmapChangedHandler(BitmapManager bitmapManager)
         {
-            ImageSource = LibrariesConverters.BitmapToImageSource(bitmapManager.PixelMap.GetBitmap());
+            ImageSource = TypesConverters.BitmapToImageSource(bitmapManager.PixelMap.GetBitmap());
         }
     }
 }

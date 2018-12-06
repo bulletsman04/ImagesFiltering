@@ -60,6 +60,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionsViewModel.cs" />
     <Compile Include="Converters\FiltersConverter.cs" />
     <Compile Include="FiltersViewModel.cs" />
     <Compile Include="ImageViewModel.cs" />

@@ -12,7 +12,25 @@ namespace Models.Filters
     {
         public void Execute(PixelMap pixelMap, FilteringArea filteringArea)
         {
-            throw new NotImplementedException();
+            foreach (var pixelPoint in filteringArea.GetPixelsToFilter())
+            {
+                int brightenessAdded = 100;
+                Pixel pixel = pixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
+                byte r = pixel.R;
+                byte g = pixel.G;
+                byte b = pixel.B;
+
+                int rPre = r + brightenessAdded;
+                int gPre = g + brightenessAdded;
+                int bPre = b + brightenessAdded;
+
+
+                pixel.R = TypesConverters.ConvertIntToByte(rPre);
+                pixel.G = TypesConverters.ConvertIntToByte(gPre);
+                pixel.B = TypesConverters.ConvertIntToByte(bPre);
+                pixelMap[pixelPoint.Point.X, pixelPoint.Point.Y] = pixel;
+
+            }
         }
     }
 }

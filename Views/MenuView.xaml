@@ -17,7 +17,7 @@
         <Style TargetType="MenuItem" x:Key="MainMenuItem">
             <Setter Property="Height" Value="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type Menu}}}">
             </Setter>
-            <Setter Property="Foreground" Value="LightGray"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
 
         </Style>
 
@@ -35,7 +35,7 @@
             <Image Stretch="Fill" Source="{Binding  RelativeSource= {RelativeSource TemplatedParent}, Path=Content}" />
         </DataTemplate>
     </UserControl.Resources>
-    <Grid Background="#6666ff">
+    <Grid Background="#ecc702">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition  Width="*"></ColumnDefinition>

@@ -13,6 +13,7 @@ namespace ViewModels
         public MenuViewModel MenuViewModel { get; set; }
         public ImageViewModel ImageViewModel { get; set; }
         public FiltersViewModel FiltersViewModel { get; set; }
+        public ActionsViewModel ActionsViewModel { get; set; }
 
         public BitmapManager BitmapManager { get; }
         public FilteringManager FilteringManager { get; }
@@ -24,6 +25,7 @@ namespace ViewModels
             MenuViewModel = new MenuViewModel();
             ImageViewModel = new ImageViewModel(BitmapManager);
             FiltersViewModel = new FiltersViewModel(FilteringManager);
+            ActionsViewModel = new ActionsViewModel(FilteringManager);;
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 
 namespace Models
 {
-    public static class LibrariesConverters
+    public static class TypesConverters
     {
         public static BitmapImage BitmapToImageSource(Bitmap bitmap)
         {
@@ -26,6 +26,21 @@ namespace Models
 
                 return bitmapimage;
             }
+        }
+
+        public static byte ConvertIntToByte(int value)
+        {
+            if (value < 0)
+            {
+                return (byte)0;
+            }
+
+            if (value > 255)
+            {
+                return (byte)255;
+            }
+
+            return (byte)value;
         }
     }
 }
