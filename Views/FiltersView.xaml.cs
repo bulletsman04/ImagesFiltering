@@ -12,17 +12,28 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModels;
 
 namespace Views
 {
     /// <summary>
     /// Interaction logic for FiltesView.xaml
     /// </summary>
-    public partial class FiltesView : UserControl
+    public partial class FiltersView : UserControl
     {
-        public FiltesView()
+        private FiltersViewModel _filtersViewModel;
+
+        public FiltersView()
         {
             InitializeComponent();
+            DataContextChanged += this.HandleDataContextChanged;
+
+        }
+
+        private void HandleDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            // Store a reference to the ViewModel.
+            _filtersViewModel = base.DataContext as FiltersViewModel;
         }
     }
 }

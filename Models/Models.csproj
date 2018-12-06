@@ -62,8 +62,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitmapManager.cs" />
-    <Compile Include="FilteringManager.cs" />
+    <Compile Include="Filtering\FilteringArea.cs" />
+    <Compile Include="Filtering\FilteringManager.cs" />
+    <Compile Include="Filtering\PixelPoint.cs" />
+    <Compile Include="Filtering\Polygon.cs" />
+    <Compile Include="Filters\BrightnessFilteringStrategy.cs" />
+    <Compile Include="Filters\ContrastFilteringStrategy.cs" />
+    <Compile Include="Filters\CustomFunctionFilteringStrategy.cs" />
+    <Compile Include="Filters\GammaFilteringStrategy.cs" />
     <Compile Include="Filters\IFilteringStrategy.cs" />
+    <Compile Include="Filters\NegationFilteringStrategy.cs" />
     <Compile Include="LibrariesConverters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

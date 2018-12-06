@@ -57,7 +57,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FiltesView.xaml">
+    <Page Include="FiltersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -80,8 +80,8 @@
     <Compile Include="ActionsView.xaml.cs">
       <DependentUpon>ActionsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FiltesView.xaml.cs">
-      <DependentUpon>FiltesView.xaml</DependentUpon>
+    <Compile Include="FiltersView.xaml.cs">
+      <DependentUpon>FiltersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="FunctionView.xaml.cs">
       <DependentUpon>FunctionView.xaml</DependentUpon>

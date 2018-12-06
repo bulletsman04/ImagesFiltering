@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +8,11 @@ using PixelMapSharp;
 
 namespace Models.Filters
 {
-    public interface IFilteringStrategy
+    public class GammaFilteringStrategy:IFilteringStrategy
     {
-        void Execute(PixelMap pixelMap, FilteringArea filteringArea);
+        public void Execute(PixelMap pixelMap, FilteringArea filteringArea)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

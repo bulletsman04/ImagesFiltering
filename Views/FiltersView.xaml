@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="Views.FiltersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Views"
+             xmlns:converters="clr-namespace:ViewModels.Converters;assembly=ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:FiltersConverter x:Key="FiltersConverter"/>
+        <Style TargetType="Border" x:Key="BorderStyle">
+            <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+            <Setter Property="Margin" Value="15 5 0 0"></Setter>
+        </Style>
+
+        <Style TargetType="StackPanel" x:Key="StackStyle">
+            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+            <Setter Property="Height" Value="Auto"></Setter>
+            <Setter Property="Margin" Value="0 5 0 5"></Setter>
+        </Style>
+        <Style TargetType="WrapPanel" x:Key="WrapStyle">
+            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+            <Setter Property="Height" Value="Auto"></Setter>
+            <Setter Property="Margin" Value="0 3 0 3"></Setter>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="TextStyle">
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Margin" Value="0 0 0 5"></Setter>
+        </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+      
+
+    </UserControl.Resources>
+    <Grid>
+        <Border Style="{StaticResource BorderStyle}" >
+            <StackPanel Style="{StaticResource StackStyle}" >
+                <TextBlock Style="{StaticResource TextStyle}">Filtry</TextBlock>
+                <WrapPanel Style="{StaticResource WrapStyle}">
+                    <RadioButton IsChecked="{Binding FilteringManager.FilteringStrategy,Mode=TwoWay,Converter={StaticResource FiltersConverter}, ConverterParameter=None}" GroupName="Filters">Brak</RadioButton>
+                </WrapPanel>
+                <WrapPanel Style="{StaticResource WrapStyle}">
+                    <RadioButton IsChecked="{Binding FilteringManager.FilteringStrategy,Mode=OneWayToSource,Converter={StaticResource FiltersConverter}, ConverterParameter=Contrast}" GroupName="Filters">Kontrast</RadioButton>
+                </WrapPanel>
+                <WrapPanel Style="{StaticResource WrapStyle}">
+                    <RadioButton IsChecked="{Binding FilteringManager.FilteringStrategy,Mode=OneWayToSource,Converter={StaticResource FiltersConverter}, ConverterParameter=Negation}" GroupName="Filters">Negacja</RadioButton>
+                </WrapPanel>
+                <WrapPanel Style="{StaticResource WrapStyle}">
+                    <RadioButton IsChecked="{Binding FilteringManager.FilteringStrategy,Mode=OneWayToSource,Converter={StaticResource FiltersConverter}, ConverterParameter=Brightness}" GroupName="Filters">Zmiana jasności</RadioButton>
+                </WrapPanel>
+                <WrapPanel Style="{StaticResource WrapStyle}">
+                    <RadioButton IsChecked="{Binding FilteringManager.FilteringStrategy,Mode=OneWayToSource,Converter={StaticResource FiltersConverter}, ConverterParameter=Gamma}" GroupName="Filters">Korekcja gamma</RadioButton>
+                </WrapPanel>
+                <WrapPanel Style="{StaticResource WrapStyle}">
+                    <RadioButton IsChecked="{Binding FilteringManager.FilteringStrategy,Mode=OneWayToSource,Converter={StaticResource FiltersConverter}, ConverterParameter=Custom}" GroupName="Filters">Własna funkcja</RadioButton>
+                </WrapPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
