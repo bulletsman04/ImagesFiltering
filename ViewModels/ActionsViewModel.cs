@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Models;
+using Models.Filtering;
 using MvvmFoundation.Wpf;
 
 namespace ViewModels
@@ -13,6 +14,7 @@ namespace ViewModels
     {
         private FilteringManager _filteringManager;
         RelayCommand _applyFilterCommand;
+        RelayCommand _brushCommand;
         public ICommand ApplyFilterCommand
         {
             get
@@ -26,6 +28,19 @@ namespace ViewModels
             }
         }
 
+        public ICommand BrushCommand
+        {
+            get
+            {
+                if (_brushCommand == null)
+                {
+                    _brushCommand = new RelayCommand(this.TurnOnBrush,
+                        null);
+                }
+                return _brushCommand;
+            }
+        }
+
         public ActionsViewModel(FilteringManager filteringManager)
         {
             _filteringManager = filteringManager;
@@ -34,6 +49,10 @@ namespace ViewModels
         private void ApplyFilter()
         {
             _filteringManager.Filter();
+        }
+        private void TurnOnBrush()
+        {
+            _filteringManager.FilteringArea.FilteringMode = FilteringMode.Brush;
         }
     }
 }

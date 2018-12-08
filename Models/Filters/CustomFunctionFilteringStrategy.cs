@@ -10,7 +10,7 @@ namespace Models.Filters
 {
     public class CustomFunctionFilteringStrategy: IFilteringStrategy
     {
-        public void Execute(PixelMap pixelMap, FilteringArea filteringArea)
+        public void Execute(FilteringArguments filteringArguments)
         {
             throw new NotImplementedException();
         }

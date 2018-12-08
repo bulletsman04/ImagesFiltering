@@ -14,7 +14,8 @@ namespace Models
     public class BitmapManager: ObservableObject
     {
         private PixelMap _pixelMap;
-        private Bitmap _startingBitmap;
+        private HistogramsManager _histogramsManager;
+
         public PixelMap PixelMap
         {
             get => _pixelMap;
@@ -22,28 +23,29 @@ namespace Models
             {
                 _pixelMap = value;
                 RaisePropertyChanged("PixelMap");
-            }}
+            }
+        }
+
+        public PixelMap StartingPixelMap { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
 
 
-        public BitmapManager()
+        public BitmapManager(HistogramsManager histogramsManager)
         {
-            Width = 450;
-            Height = 600;
+            _histogramsManager = histogramsManager;
             SetImage(Resources.landscape);
         }
 
         public void SetImage(Image image)
         {
-            _startingBitmap = new System.Drawing.Bitmap(image, Width, Height);
-            PixelMap = PixelMap.SlowLoad(_startingBitmap);
-        }
+            Bitmap  bitmap = new System.Drawing.Bitmap(image);
+            Width = image.Width;
+            Height = image.Height;
+            PixelMap = PixelMap.SlowLoad(bitmap);
+            StartingPixelMap = PixelMap.SlowLoad(bitmap);
 
-        public void ResetPixelMap()
-        {
-            PixelMap = PixelMap.SlowLoad(_startingBitmap);
+            _histogramsManager.RecalculateFromBitmap(PixelMap);
         }
-       
     }
 }

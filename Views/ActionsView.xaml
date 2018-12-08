@@ -56,7 +56,7 @@
                     <Button>Usuń wielokąt</Button>
                  </WrapPanel>
                 <WrapPanel Grid.Row="3" Style="{StaticResource WrapStyle}">
-                    <Button>Pędzel kołowy</Button>
+                    <Button Command="{Binding BrushCommand}">Pędzel kołowy</Button>
                 </WrapPanel>
                 <WrapPanel Grid.Row="4" Style="{StaticResource WrapStyle}">
                     <Button Command="{Binding ApplyFilterCommand}">Zastosuj filtr</Button>

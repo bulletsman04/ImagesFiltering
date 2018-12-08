@@ -20,6 +20,7 @@ namespace Models.Filtering
         private PixelMap _pixelMap;
         public FilteringMode FilteringMode { get; set; }
         public int? BrushRadius { get; set; }
+        public Point? BrushCenter { get; set; }
         public Polygon Polygon { get; set; }
 
         public FilteringArea(PixelMap pixelMap)
@@ -27,6 +28,7 @@ namespace Models.Filtering
             _pixelMap = pixelMap;
             FilteringMode = FilteringMode.Bitmap;
             BrushRadius = null;
+            BrushCenter = null;
             Polygon = null;
         }
 

@@ -11,15 +11,24 @@ namespace Models.Filters
 {
     public class NegationFilteringStrategy: IFilteringStrategy
     {
-        public void Execute(PixelMap pixelMap, FilteringArea filteringArea)
+        public void Execute(FilteringArguments filteringArguments)
         {
-            foreach (var pixelPoint in filteringArea.GetPixelsToFilter())
+            foreach (var pixelPoint in filteringArguments.FilteringArea.GetPixelsToFilter())
             {
-                Pixel pixel = pixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
-                pixel.R = (byte)(255 - pixel.R);
-                pixel.G = (byte)(255 - pixel.G);
-                pixel.B = (byte)(255 - pixel.B);
-                pixelMap[pixelPoint.Point.X, pixelPoint.Point.Y] = pixel;
+                Pixel pixelF = filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
+                Pixel pixelS = filteringArguments.BasicPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
+
+                HistogramsManager histogramsManager = filteringArguments.HistogramsManager;
+                Pixel prev = new Pixel(pixelF.R,pixelF.G,pixelF.B);
+                
+                pixelF.R = (byte)(255 - pixelS.R);
+                pixelF.G = (byte)(255 - pixelS.G);
+                pixelF.B = (byte)(255 - pixelS.B);
+
+                histogramsManager.RecalculateFromPixel(prev,pixelF);
+                
+
+                filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y] = pixelF;
 
             }
         }

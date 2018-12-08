@@ -47,5 +47,11 @@
                 x:FieldModifier="private"
                 DataContext="{Binding Path=FiltersViewModel, Mode=OneTime}" />
         </Grid>
+        <local:HistogramsView
+            Grid.Row="1"
+            Grid.Column="2"
+            x:Name="HistogramsView"
+            x:FieldModifier="private"
+            DataContext="{Binding Path=HistogramsViewModel, Mode=OneTime}" />
     </Grid>
 </UserControl>

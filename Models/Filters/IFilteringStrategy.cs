@@ -11,6 +11,6 @@ namespace Models.Filters
 {
     public interface IFilteringStrategy
     {
-        void Execute(PixelMap pixelMap, FilteringArea filteringArea);
+        void Execute(FilteringArguments filteringArguments);
     }
 }

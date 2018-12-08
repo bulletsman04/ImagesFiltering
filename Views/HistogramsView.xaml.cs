@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModels;
 
 namespace Views
 {
@@ -20,9 +21,19 @@ namespace Views
     /// </summary>
     public partial class HistogramsView : UserControl
     {
+        private HistogramsViewModel _histogramsViewModel;
+
         public HistogramsView()
         {
             InitializeComponent();
+            DataContextChanged += this.HandleDataContextChanged;
+
+        }
+
+        private void HandleDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            // Store a reference to the ViewModel.
+            _histogramsViewModel = base.DataContext as HistogramsViewModel;
         }
     }
 }

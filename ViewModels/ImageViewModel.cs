@@ -24,11 +24,13 @@ namespace ViewModels
         }
 
         private BitmapManager _bitmapManager;
+        public FilteringManager FilteringManager { get; set; }
         public PropertyObserver<BitmapManager> BitmapObserver { get; set; }
 
-        public ImageViewModel(BitmapManager bitmapManager)
+        public ImageViewModel(BitmapManager bitmapManager, FilteringManager filteringManager)
         {
             _bitmapManager = bitmapManager;
+            FilteringManager = filteringManager;
             BitmapChangedHandler(_bitmapManager);
             RegisterPropertiesChanged();
         }

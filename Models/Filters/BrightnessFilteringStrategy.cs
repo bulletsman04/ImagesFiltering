@@ -10,12 +10,12 @@ namespace Models.Filters
 {
     public class BrightnessFilteringStrategy:IFilteringStrategy
     {
-        public void Execute(PixelMap pixelMap, FilteringArea filteringArea)
+        public void Execute(FilteringArguments filteringArguments)
         {
-            foreach (var pixelPoint in filteringArea.GetPixelsToFilter())
+            foreach (var pixelPoint in filteringArguments.FilteringArea.GetPixelsToFilter())
             {
                 int brightenessAdded = 100;
-                Pixel pixel = pixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
+                Pixel pixel = filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
                 byte r = pixel.R;
                 byte g = pixel.G;
                 byte b = pixel.B;
@@ -28,7 +28,7 @@ namespace Models.Filters
                 pixel.R = TypesConverters.ConvertIntToByte(rPre);
                 pixel.G = TypesConverters.ConvertIntToByte(gPre);
                 pixel.B = TypesConverters.ConvertIntToByte(bPre);
-                pixelMap[pixelPoint.Point.X, pixelPoint.Point.Y] = pixel;
+                filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y] = pixel;
 
             }
         }
