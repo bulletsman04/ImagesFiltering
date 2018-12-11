@@ -63,6 +63,7 @@
     <Compile Include="ActionsViewModel.cs" />
     <Compile Include="Converters\FiltersConverter.cs" />
     <Compile Include="FiltersViewModel.cs" />
+    <Compile Include="FunctionViewModel.cs" />
     <Compile Include="HistogramsViewModel.cs" />
     <Compile Include="ImageViewModel.cs" />
     <Compile Include="MainViewModel.cs" />

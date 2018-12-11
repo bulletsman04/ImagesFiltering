@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModels;
 
 namespace Views
 {
@@ -20,9 +21,37 @@ namespace Views
     /// </summary>
     public partial class FunctionView : UserControl
     {
+        private FunctionViewModel _functionViewModel;
+
         public FunctionView()
         {
             InitializeComponent();
+            DataContextChanged += this.HandleDataContextChanged;
+
+        }
+
+        private void HandleDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            // Store a reference to the ViewModel.
+            _functionViewModel = base.DataContext as FunctionViewModel;
+        }
+
+        private void CustomFunction_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Point mousePoint = e.GetPosition(sender as Image);
+            _functionViewModel.HandleMouseDown(mousePoint,CustomFunction.Width,CustomFunction.Height);
+
+        }
+
+        private void CustomFunction_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            Point mousePoint = e.GetPosition(sender as Image);
+            _functionViewModel.HandleMouseMove(mousePoint,CustomFunction.Width, CustomFunction.Height);
+        }
+
+        private void CustomFunction_OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            _functionViewModel.HandleMouseUp();
         }
     }
 }

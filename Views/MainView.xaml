@@ -14,8 +14,8 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="45*" />
-            <ColumnDefinition Width="30*" />
             <ColumnDefinition Width="25*" />
+            <ColumnDefinition Width="30*" />
         </Grid.ColumnDefinitions>
         <local:MenuView
             Grid.Row="0"
@@ -46,6 +46,11 @@
                 x:Name="FiltersView"
                 x:FieldModifier="private"
                 DataContext="{Binding Path=FiltersViewModel, Mode=OneTime}" />
+            <local:FunctionView
+                Grid.Row="2"
+                x:Name="FunctionView"
+                x:FieldModifier="private"
+                DataContext="{Binding Path=FunctionViewModel, Mode=OneTime}" />
         </Grid>
         <local:HistogramsView
             Grid.Row="1"
