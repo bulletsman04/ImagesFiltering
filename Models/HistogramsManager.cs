@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
@@ -19,14 +20,17 @@ namespace Models
 
         public HistogramsManager()
         {
-            RHistogram = new Histogram();
-            GHistogram = new Histogram();
-            BHistogram = new Histogram();
+            RHistogram = new Histogram(new SolidColorBrush(Color.FromRgb(255, 0, 0)));
+            GHistogram = new Histogram(new SolidColorBrush(Color.FromRgb(0, 255, 0)));
+            BHistogram = new Histogram(new SolidColorBrush(Color.FromRgb(0, 0, 255)));
 
         }
 
         public void RecalculateFromBitmap(PixelMap pixelMap)
         {
+            RHistogram.ResetValues();
+            GHistogram.ResetValues();
+            BHistogram.ResetValues();
             for (int i = 0; i < pixelMap.Width; i++)
             {
                 for (int j = 0; j < pixelMap.Height; j++)
@@ -37,7 +41,10 @@ namespace Models
                     BHistogram.ObservableValues[pixel.B].Value++;
 
                 }
+
+               
             }
+            RecalculateYLabels();
         }
 
         public void RecalculateFromPixel(Pixel prev, Pixel next)
@@ -49,6 +56,28 @@ namespace Models
             RHistogram.ObservableValues[next.R].Value++;
             GHistogram.ObservableValues[next.G].Value++;
             BHistogram.ObservableValues[next.B].Value++;
+            
+        }
+
+        public void RecalculateYLabels()
+        {
+            foreach (var histogram in new []{RHistogram,GHistogram,BHistogram})
+            {
+                int maxvalue = 0;
+
+                foreach (ObservableValue val in histogram.SeriesCollection[0].Values)
+                {
+                    if (val.Value > maxvalue)
+                    {
+                        maxvalue = (int)val.Value;
+                    }
+                }
+
+                histogram.SeparatorY = new Separator()
+                {
+                    Step = (int)(maxvalue / 3)
+                };
+            }
         }
     }
 }

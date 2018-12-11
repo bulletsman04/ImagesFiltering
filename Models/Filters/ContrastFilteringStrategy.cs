@@ -15,21 +15,29 @@ namespace Models.Filters
         {
             foreach (var pixelPoint in filteringArguments.FilteringArea.GetPixelsToFilter())
             {
-                int contrast = 4;
-                Pixel pixel = filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
-                byte r = pixel.R;
-                byte g = pixel.G;
-                byte b = pixel.B;
+                int contrast = 2;
+                Pixel pixelF = filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
+                Pixel pixelS = filteringArguments.BasicPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
+
+                HistogramsManager histogramsManager = filteringArguments.HistogramsManager;
+                Pixel prev = new Pixel(pixelF.R, pixelF.G, pixelF.B);
+
+                byte r = pixelS.R;
+                byte g = pixelS.G;
+                byte b = pixelS.B;
 
                 int rPre = (r - 128) * contrast + 128;
                 int gPre = (g - 128) * contrast + 128;
                 int bPre = (b - 128) * contrast + 128;
 
                 
-                pixel.R = TypesConverters.ConvertIntToByte(rPre);
-                pixel.G = TypesConverters.ConvertIntToByte(gPre);
-                pixel.B = TypesConverters.ConvertIntToByte(bPre);
-                filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y] = pixel;
+                pixelF.R = TypesConverters.ConvertIntToByte(rPre);
+                pixelF.G = TypesConverters.ConvertIntToByte(gPre);
+                pixelF.B = TypesConverters.ConvertIntToByte(bPre);
+
+                histogramsManager.RecalculateFromPixel(prev, pixelF);
+
+                filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y] = pixelF;
 
             }
         }

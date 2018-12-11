@@ -7,21 +7,30 @@ using System.Windows.Media;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
+using MvvmFoundation.Wpf;
 
 namespace Models
 {
-    public class Histogram
+    public class Histogram: ObservableObject
     {
         private SeriesCollection _seriesCollection;
+        private Separator _separatorY;
         public SeriesCollection SeriesCollection { get; set; }
         public ChartValues<ObservableValue> ObservableValues { get; set; }
         public Func<int, string> Formatter { get; set; }
         public Separator Separator { get; set; }
-        public Separator SeparatorY { get; set; }
+        public Separator SeparatorY
+        {
+            get => _separatorY;
+            set
+            {
+                _separatorY = value;
+                RaisePropertyChanged("SeparatorY");
+            } }
         public int ValuesNum { get; set; } = 256;
 
 
-        public Histogram()
+        public Histogram(SolidColorBrush solidColor)
         {
             InitializeValues();
             SeriesCollection = new SeriesCollection()
@@ -29,10 +38,10 @@ namespace Models
                 new ColumnSeries()
                 {
                     Values = ObservableValues,
-                    MaxColumnWidth = double.PositiveInfinity,
+                    MaxColumnWidth = 2,
                     ColumnPadding = 0,
                     LabelsPosition = BarLabelPosition.Top,
-                    Fill = new SolidColorBrush(Color.FromRgb(255,0,0))
+                    Fill = solidColor
                 }
             };
             Separator = new Separator()
@@ -50,7 +59,15 @@ namespace Models
             ObservableValues = new ChartValues<ObservableValue>();
             for (int i = 0; i < ValuesNum; i++)
             {
-                ObservableValues.Add(new ObservableValue(i));
+                ObservableValues.Add(new ObservableValue(0));
+            }
+        }
+
+        public void ResetValues()
+        {
+            for (int i = 0; i < ValuesNum; i++)
+            {
+                ObservableValues[i].Value = 0;
             }
         }
     }

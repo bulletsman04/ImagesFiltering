@@ -15,12 +15,19 @@ namespace Models.Filters
             foreach (var pixelPoint in filteringArguments.FilteringArea.GetPixelsToFilter())
             {
                 float gamma = 1/2.2f;
-                Pixel pixel = filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
-                pixel.R = (byte)(255* Math.Pow(pixel.R/255f,gamma));
-                pixel.G = (byte)(255 * Math.Pow(pixel.G / 255f, gamma));
-                pixel.B = (byte)(255 * Math.Pow(pixel.B / 255f, gamma));
+                Pixel pixelF = filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
+                Pixel pixelS = filteringArguments.BasicPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
 
-                filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y] = pixel;
+                HistogramsManager histogramsManager = filteringArguments.HistogramsManager;
+                Pixel prev = new Pixel(pixelF.R, pixelF.G, pixelF.B);
+
+                pixelF.R = (byte)(255* Math.Pow(pixelS.R/255f,gamma));
+                pixelF.G = (byte)(255 * Math.Pow(pixelS.G / 255f, gamma));
+                pixelF.B = (byte)(255 * Math.Pow(pixelS.B / 255f, gamma));
+
+                histogramsManager.RecalculateFromPixel(prev, pixelF);
+
+                filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y] = pixelF;
 
             }
         }

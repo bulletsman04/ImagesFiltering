@@ -15,11 +15,27 @@
         </Grid.RowDefinitions>
         <wpf:CartesianChart Grid.Row="0" Series="{Binding HistogramsManager.RHistogram.SeriesCollection}">
             <wpf:CartesianChart.AxisX>
-                <wpf:Axis  MaxValue="255" Separator="{Binding HistogramsManager.RHistogram.Separator}"  ></wpf:Axis>
+                <wpf:Axis  MaxValue="256" Separator="{Binding HistogramsManager.RHistogram.Separator}"  ></wpf:Axis>
             </wpf:CartesianChart.AxisX>
             <wpf:CartesianChart.AxisY>
                 <wpf:Axis Separator="{Binding HistogramsManager.RHistogram.SeparatorY}"></wpf:Axis>
             </wpf:CartesianChart.AxisY>
         </wpf:CartesianChart>
-</Grid>
+        <wpf:CartesianChart Grid.Row="1" Series="{Binding HistogramsManager.GHistogram.SeriesCollection}">
+            <wpf:CartesianChart.AxisX>
+                <wpf:Axis  MaxValue="256" Separator="{Binding HistogramsManager.GHistogram.Separator}"  ></wpf:Axis>
+            </wpf:CartesianChart.AxisX>
+            <wpf:CartesianChart.AxisY>
+                <wpf:Axis Separator="{Binding HistogramsManager.GHistogram.SeparatorY}"></wpf:Axis>
+            </wpf:CartesianChart.AxisY>
+        </wpf:CartesianChart>
+        <wpf:CartesianChart Grid.Row="2" Series="{Binding HistogramsManager.BHistogram.SeriesCollection}">
+            <wpf:CartesianChart.AxisX>
+                <wpf:Axis  MaxValue="256" Separator="{Binding HistogramsManager.BHistogram.Separator}"  ></wpf:Axis>
+            </wpf:CartesianChart.AxisX>
+            <wpf:CartesianChart.AxisY>
+                <wpf:Axis Separator="{Binding HistogramsManager.BHistogram.SeparatorY}"></wpf:Axis>
+            </wpf:CartesianChart.AxisY>
+        </wpf:CartesianChart>
+    </Grid>
 </UserControl>

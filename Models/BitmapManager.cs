@@ -43,7 +43,7 @@ namespace Models
             Width = image.Width;
             Height = image.Height;
             PixelMap = PixelMap.SlowLoad(bitmap);
-            StartingPixelMap = PixelMap.SlowLoad(bitmap);
+            StartingPixelMap = new PixelMap(PixelMap);
 
             _histogramsManager.RecalculateFromBitmap(PixelMap);
         }

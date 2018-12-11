@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Models.Filtering;
 using Models.Filters;
+using PixelMapSharp;
 
 namespace Models
 {
@@ -47,8 +48,24 @@ namespace Models
         { 
             _filteringArguments.FilteredPixelMap = _bitmapManager.PixelMap;
             _filteringArguments.BasicPixelMap = _bitmapManager.StartingPixelMap;
-            FilteringStrategy?.Execute(_filteringArguments);
-            _bitmapManager.PixelMap = _bitmapManager.PixelMap;
+
+            if (FilteringStrategy != null)
+            {
+                FilteringStrategy.Execute(_filteringArguments);
+            }
+            else
+            {
+                ResetFiltering();
+            }
+
+        _bitmapManager.PixelMap = _bitmapManager.PixelMap;
+            HistogramsManager.RecalculateYLabels();
+        }
+
+        private void ResetFiltering()
+        {
+            _bitmapManager.PixelMap = new PixelMap(_bitmapManager.StartingPixelMap);
+            HistogramsManager.RecalculateFromBitmap(_bitmapManager.PixelMap);
         }
     }
 }
