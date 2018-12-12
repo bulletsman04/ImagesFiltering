@@ -17,12 +17,20 @@ namespace Models
         public Histogram RHistogram { get; set; }
         public Histogram GHistogram { get; set; }
         public Histogram BHistogram { get; set; }
+        private int[] _rTemp;
+        private int[] _gTemp;
+        private int[] _bTemp;
+
 
         public HistogramsManager()
         {
             RHistogram = new Histogram(new SolidColorBrush(Color.FromRgb(255, 0, 0)));
             GHistogram = new Histogram(new SolidColorBrush(Color.FromRgb(0, 255, 0)));
             BHistogram = new Histogram(new SolidColorBrush(Color.FromRgb(0, 0, 255)));
+            _rTemp = new int[256];
+            _gTemp = new int[256];
+            _bTemp = new int[256];
+
 
         }
 
@@ -47,16 +55,35 @@ namespace Models
             RecalculateYLabels();
         }
 
-        public void RecalculateFromPixel(Pixel prev, Pixel next)
+        public void RecalculateTempFromPixel(Pixel prev, Pixel next)
         {
-            RHistogram.ObservableValues[prev.R].Value--;
-            GHistogram.ObservableValues[prev.G].Value--;
-            BHistogram.ObservableValues[prev.B].Value--;
+            _rTemp[prev.R]--;
+            _gTemp[prev.G]--;
+            _bTemp[prev.B]--;
 
-            RHistogram.ObservableValues[next.R].Value++;
-            GHistogram.ObservableValues[next.G].Value++;
-            BHistogram.ObservableValues[next.B].Value++;
-            
+            _rTemp[next.R]++;
+            _gTemp[next.G]++;
+            _bTemp[next.B]++;
+
+        }
+
+        public void RecalculateFromTemp()
+        {
+            for (int i = 0; i < 256; i++)
+            {
+
+                RHistogram.ObservableValues[i].Value += _rTemp[i];
+                GHistogram.ObservableValues[i].Value += _gTemp[i];
+                BHistogram.ObservableValues[i].Value += _bTemp[i];
+
+                _rTemp[i] = 0;
+                _gTemp[i] = 0;
+                _bTemp[i] = 0;
+
+            }
+
+
+            RecalculateYLabels();
         }
 
         public void RecalculateYLabels()

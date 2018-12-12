@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using Models;
+using Models.Filtering;
 using MvvmFoundation.Wpf;
 
 namespace ViewModels
@@ -44,6 +45,41 @@ namespace ViewModels
         private void BitmapChangedHandler(BitmapManager bitmapManager)
         {
             ImageSource = TypesConverters.BitmapToImageSource(bitmapManager.PixelMap.GetBitmap());
+        }
+
+
+        public void HandleMouseDown()
+        {
+            FilteringArea filteringArea = FilteringManager.FilteringArea;
+            filteringArea.FilteringMode = FilteringMode.Brush;
+            
+        }
+
+        public void HandleMouseMove(System.Windows.Point point, double width, double height)
+        {
+            FilteringArea filteringArea = FilteringManager.FilteringArea;
+            float scale  = (float)(_bitmapManager.PixelMap.Width/ width);
+
+            filteringArea.CenterX = (int)(point.X*scale );
+            filteringArea.CenterY = (int)(point.Y*scale );
+            filteringArea.BrushDelimeter = (int)(40 * scale);
+
+            if(filteringArea.FilteringMode == FilteringMode.Brush)
+                FilteringManager.Filter();
+
+           
+        }
+
+        public void HandleMouseUp()
+        {
+            FilteringArea filteringArea = FilteringManager.FilteringArea;
+            filteringArea.FilteringMode = FilteringMode.PreBrush;
+            FilteringManager.HistogramsManager.RecalculateFromTemp();
+        }
+
+        public bool IsPreOrBrushMode()
+        {
+            return FilteringManager.FilteringArea.FilteringMode == FilteringMode.PreBrush || FilteringManager.FilteringArea.FilteringMode == FilteringMode.Brush;
         }
     }
 }

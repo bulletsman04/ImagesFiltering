@@ -20,9 +20,27 @@ namespace Views
     /// </summary>
     public partial class ActionsView : UserControl
     {
+        private bool _isColor1 = true;
         public ActionsView()
         {
             InitializeComponent();
+        }
+
+        private void BrushButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var color1 = new SolidColorBrush(Color.FromRgb(221,221,221));
+            var color2 = new SolidColorBrush(Color.FromRgb(100, 100, 100));
+
+            if (_isColor1)
+            {
+                BrushButton.Background = color2;
+                _isColor1 = false;
+            }
+            else
+            {
+                BrushButton.Background = color1;
+                _isColor1 = true;
+            }
         }
     }
 }

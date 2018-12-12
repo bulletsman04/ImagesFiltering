@@ -43,6 +43,7 @@
         </Grid.ColumnDefinitions>
 
         <Menu  Background="Transparent"  Grid.Column="0" Name="MainMenu">
+            <MenuItem Command="{Binding SetTextureCommand}" Name="Image"  Style="{StaticResource MainMenuItem}"  Header="Zmień zdjęcie"></MenuItem>
             <MenuItem PreviewMouseDown="Documentation_OnPreviewMouseDown" Name="Documentation"  Style="{StaticResource MainMenuItem}"  Header="Dokumentacja"></MenuItem>
         </Menu>
         <WrapPanel Name="MovePanel" Style="{StaticResource TopBarDrag}" PreviewMouseDown="MenuView_OnMouseDown"  Grid.Column="1"></WrapPanel>

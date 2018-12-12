@@ -48,11 +48,21 @@ namespace ViewModels
 
         private void ApplyFilter()
         {
-            _filteringManager.Filter();
+            if (_filteringManager.FilteringArea.FilteringMode == FilteringMode.Bitmap)
+            {
+                _filteringManager.Filter();
+            }
         }
         private void TurnOnBrush()
         {
-            _filteringManager.FilteringArea.FilteringMode = FilteringMode.Brush;
+            if (_filteringManager.FilteringArea.FilteringMode == FilteringMode.PreBrush)
+            {
+                _filteringManager.FilteringArea.FilteringMode = FilteringMode.Bitmap;
+            }
+            else
+            {
+                _filteringManager.FilteringArea.FilteringMode = FilteringMode.PreBrush;
+            }
         }
     }
 }

@@ -22,7 +22,6 @@ namespace Views
     public partial class ImageView : UserControl
     {
         private ImageViewModel _imageViewModel;
-
         public ImageView()
         {
             InitializeComponent();
@@ -34,6 +33,39 @@ namespace Views
         {
             // Store a reference to the ViewModel.
             _imageViewModel = base.DataContext as ImageViewModel;
+        }
+
+        private void Image_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Point mousePoint = e.GetPosition(ImageHolder);
+            _imageViewModel.HandleMouseDown();
+        }
+        
+        private void Image_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (_imageViewModel.IsPreOrBrushMode())
+            {
+                Point mousePoint = e.GetPosition(ImageHolder);
+                int delimeter = (int) Brush.Width;
+                Canvas.SetLeft(Brush, mousePoint.X - delimeter / 2);
+                Canvas.SetTop(Brush, mousePoint.Y - delimeter / 2);
+
+                _imageViewModel.HandleMouseMove(mousePoint, Area.ActualWidth, Area.ActualHeight);
+            }
+            else
+            {
+                Canvas.SetLeft(Brush, 2000);
+                Canvas.SetTop(Brush, 2000);
+            }
+        }
+
+        private void Image_OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Point mousePoint = e.GetPosition(ImageHolder);
+        
+
+
+            _imageViewModel.HandleMouseUp();
         }
     }
 }

@@ -13,13 +13,13 @@ namespace Models.Filters
     {
         public void Execute(FilteringArguments filteringArguments)
         {
+            HistogramsManager histogramsManager = filteringArguments.HistogramsManager;
             foreach (var pixelPoint in filteringArguments.FilteringArea.GetPixelsToFilter())
             {
                 int contrast = 2;
                 Pixel pixelF = filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
                 Pixel pixelS = filteringArguments.BasicPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
-
-                HistogramsManager histogramsManager = filteringArguments.HistogramsManager;
+                
                 Pixel prev = new Pixel(pixelF.R, pixelF.G, pixelF.B);
 
                 byte r = pixelS.R;
@@ -34,12 +34,12 @@ namespace Models.Filters
                 pixelF.R = TypesConverters.ConvertIntToByte(rPre);
                 pixelF.G = TypesConverters.ConvertIntToByte(gPre);
                 pixelF.B = TypesConverters.ConvertIntToByte(bPre);
-
-                histogramsManager.RecalculateFromPixel(prev, pixelF);
-
+                histogramsManager.RecalculateTempFromPixel(prev, pixelF);
                 filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y] = pixelF;
 
             }
+            if (filteringArguments.FilteringArea.FilteringMode != FilteringMode.Brush)
+                histogramsManager.RecalculateFromTemp();
         }
 
      

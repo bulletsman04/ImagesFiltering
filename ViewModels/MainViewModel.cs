@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Models;
 using Models.CustomFunction;
+using Models.Filtering;
 using Models.Filters;
 
 namespace ViewModels
@@ -24,16 +25,18 @@ namespace ViewModels
         public FilteringManager FilteringManager { get; }
         public CustomFunctionBitmap CustomFunctionBitmap { get; set; }
         public CustomFunction CustomFunction { get; set; }
+        public FilteringArea FilteringArea { get; set; }
         public MainViewModel()
         {
             
             HistogramsManager = new HistogramsManager();
             BitmapManager = new BitmapManager(HistogramsManager);
-            FilteringManager = new FilteringManager(BitmapManager, HistogramsManager);
+            FilteringArea = new FilteringArea(BitmapManager.PixelMap);
+            FilteringManager = new FilteringManager(BitmapManager, HistogramsManager,FilteringArea);
             CustomFunction = new CustomFunction();
             CustomFunctionBitmap = new CustomFunctionBitmap(CustomFunction);
 
-            MenuViewModel = new MenuViewModel();
+            MenuViewModel = new MenuViewModel(BitmapManager);
             ImageViewModel = new ImageViewModel(BitmapManager, FilteringManager);
             FiltersViewModel = new FiltersViewModel(FilteringManager,CustomFunction);
             ActionsViewModel = new ActionsViewModel(FilteringManager);

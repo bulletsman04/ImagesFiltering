@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Models;
 using MvvmFoundation.Wpf;
 
 namespace ViewModels
 {
     public class MenuViewModel
     {
-        public MenuViewModel()
+        private BitmapManager _bitmapManager;
+        public MenuViewModel(BitmapManager bitmapManager)
         {
+            _bitmapManager = bitmapManager;
         }
 
         RelayCommand _closeCommand;
@@ -74,6 +78,36 @@ namespace ViewModels
                         null);
                 }
                 return _documentationCommand;
+            }
+        }
+
+        RelayCommand<string> _setTextureCommand;
+        public ICommand SetTextureCommand
+        {
+            get
+            {
+                if (_setTextureCommand == null)
+                {
+                    _setTextureCommand = new RelayCommand<string>(this.SetTexture,
+                        null);
+                }
+                return _setTextureCommand;
+            }
+        }
+
+        public void SetTexture(string index)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            dlg.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*"; ;
+
+            bool? result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                string filename = dlg.FileName;
+                Image image = Image.FromFile(filename);
+                _bitmapManager.SetImage(image);
             }
         }
     }

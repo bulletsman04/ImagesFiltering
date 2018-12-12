@@ -50,13 +50,13 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Style="{StaticResource TextStyle}">Akcje</TextBlock>
                 <WrapPanel Grid.Row="1" Style="{StaticResource WrapStyle}">
-                    <Button>Dodaj wielokąt</Button>
+                    <Button IsEnabled="False">Dodaj wielokąt</Button>
                 </WrapPanel>
                 <WrapPanel Grid.Row="2" Style="{StaticResource WrapStyle}">
-                    <Button>Usuń wielokąt</Button>
+                    <Button IsEnabled="False">Usuń wielokąt</Button>
                  </WrapPanel>
                 <WrapPanel Grid.Row="3" Style="{StaticResource WrapStyle}">
-                    <Button Command="{Binding BrushCommand}">Pędzel kołowy</Button>
+                    <Button Name="BrushButton" Click="BrushButton_OnClick" Command="{Binding BrushCommand}">Pędzel kołowy</Button>
                 </WrapPanel>
                 <WrapPanel Grid.Row="4" Style="{StaticResource WrapStyle}">
                     <Button Command="{Binding ApplyFilterCommand}">Zastosuj filtr</Button>

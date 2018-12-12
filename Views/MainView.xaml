@@ -14,8 +14,8 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="45*" />
-            <ColumnDefinition Width="25*" />
-            <ColumnDefinition Width="30*" />
+            <ColumnDefinition Width="22*" />
+            <ColumnDefinition Width="33*" />
         </Grid.ColumnDefinitions>
         <local:MenuView
             Grid.Row="0"
