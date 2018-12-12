@@ -31,16 +31,16 @@ namespace Models.CustomFunction
         private int _step = 35;
 
 
-        private CustomFunction _customFunction;
+        public CustomFunction Function { get; set; }
 
-        private List<Point> _points;
+        public List<Point> Points { get; private set; }
         private List<Rectangle> _pointsRectangles;
         private Point? _clickedPoint;
         private int _clickedPointIndex;
 
         public CustomFunctionBitmap(CustomFunction customFunction)
         {
-            _customFunction = customFunction;
+            Function = customFunction;
             _width = _height = 290;
             _xOffset = _yOffset = 34;
             _yDownOffset = 25;
@@ -77,15 +77,15 @@ namespace Models.CustomFunction
                 gr.DrawString("255", drawFont, drawBrush, _width - _xOffset + 14, _height - _yOffset + 10);
 
                 // Bresenham
-                LineDrawer ld = new LineDrawer(bitmap, _customFunction.FunctionTable, BitmapPointToFunctionPoint);
+                LineDrawer ld = new LineDrawer(bitmap, Function.FunctionTable, BitmapPointToFunctionPoint);
 
-                for (int j = 0; j < _points.Count - 1; j++)
+                for (int j = 0; j < Points.Count - 1; j++)
                 {
-                    ld.MyDrawLine(penLine, _points[j], _points[j + 1]);
+                    ld.MyDrawLine(penLine, Points[j], Points[j + 1]);
                 }
 
                 int i = 0;
-                foreach (var p in _points)
+                foreach (var p in Points)
                 {
                     
                     gr.FillRectangle(i%2==0?drawBrushPoint1:drawBrushPoint2,_pointsRectangles[i]);
@@ -108,16 +108,28 @@ namespace Models.CustomFunction
 
         private void InitializePoints()
         {
-            _points = new List<Point>();
+            Points = new List<Point>();
             _pointsRectangles = new List<Rectangle>();
             for (int i = 0; i < 256; i += _step)
             {
-                Point p = FunctionPointToBitmapPoint(i, _customFunction.FunctionTable[i]);
-                _points.Add(p);
+                Point p = FunctionPointToBitmapPoint(i, Function.FunctionTable[i]);
+                Points.Add(p);
                 _pointsRectangles.Add(new Rectangle(p.X - 4, p.Y - 4, 8, 8));
 
             }
            
+        }
+
+        public void SetPoints(List<Point> points)
+        {
+            Points = new List<Point>();
+            _pointsRectangles = new List<Rectangle>();
+            foreach (var point in points)
+            {
+                Points.Add(new Point(point.X,point.Y));
+                _pointsRectangles.Add(new Rectangle(point.X - 4, point.Y - 4, 8, 8));
+            }
+            RepaintBitmap();
         }
 
 
@@ -135,7 +147,7 @@ namespace Models.CustomFunction
             {
                 if (rectangle.Contains((int)x, (int)y))
                 {
-                    _clickedPoint = _points[i];
+                    _clickedPoint = Points[i];
                     _clickedPointIndex = i;
                     break;
                 }
@@ -158,22 +170,22 @@ namespace Models.CustomFunction
                 return;
             }
 
-            if ( _clickedPointIndex== 0 || _clickedPointIndex == _points.Count - 1)
+            if ( _clickedPointIndex== 0 || _clickedPointIndex == Points.Count - 1)
             {
                 return;
             }
 
             bool yUp = y >= _yOffset - _yDownOffset;
             bool yDown = y <= _height - _yDownOffset;
-            bool leftPoint = x > _points[_clickedPointIndex - 1].X;
-            bool rightPoint = x < _points[_clickedPointIndex + 1].X;
+            bool leftPoint = x > Points[_clickedPointIndex - 1].X;
+            bool rightPoint = x < Points[_clickedPointIndex + 1].X;
 
             if (!yUp || !yDown || !leftPoint || !rightPoint)
             {
                 return;
             }
 
-            _points[_clickedPointIndex] = new Point(x,y);
+            Points[_clickedPointIndex] = new Point(x,y);
             _pointsRectangles[_clickedPointIndex] = new Rectangle(x - 4, y - 4, 8, 8);
 
             RepaintBitmap();

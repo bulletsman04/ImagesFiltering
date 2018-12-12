@@ -6,17 +6,54 @@
              xmlns:local="clr-namespace:Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <!--<Style TargetType="TabControl">
+            <Setter Property="Margin" Value="0 10 0 10"></Setter>
+        </Style>-->
+    </UserControl.Resources>
     <Grid>
-        <Image 
-            Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}, Mode=FindAncestor}}" 
-            Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type Grid}, Mode=FindAncestor}}" 
-            Source="{Binding ImageSource, Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-            Stretch="Fill"
-            Name="CustomFunction"
-            MouseDown="CustomFunction_OnMouseDown"
-            MouseMove="CustomFunction_OnMouseMove"
-            MouseUp="CustomFunction_OnMouseUp"
-        >
-        </Image>
+        <TabControl>
+            <TabItem Header="R">
+                <Image 
+                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type TabItem}, Mode=FindAncestor}}" 
+                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type TabItem}, Mode=FindAncestor}}" 
+                    Source="{Binding ImageSourceR, Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                    Stretch="Fill"
+                    Name="CustomFunctionR"
+                    MouseDown="CustomFunction_OnMouseDown"
+                    MouseMove="CustomFunction_OnMouseMove"
+                    MouseUp="CustomFunction_OnMouseUp"
+                >
+                </Image>
+            </TabItem>
+            <TabItem Header="G">
+                <Image 
+                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type TabItem}, Mode=FindAncestor}}" 
+                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type TabItem}, Mode=FindAncestor}}" 
+                    Source="{Binding ImageSourceG, Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                    Stretch="Fill"
+                    Name="CustomFunctionG"
+                    MouseDown="CustomFunction_OnMouseDown"
+                    MouseMove="CustomFunction_OnMouseMove"
+                    MouseUp="CustomFunction_OnMouseUp"
+                >
+                </Image>
+            </TabItem>
+            <TabItem Header="B">
+                <Image 
+                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type TabItem}, Mode=FindAncestor}}" 
+                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type TabItem}, Mode=FindAncestor}}" 
+                    Source="{Binding ImageSourceB, Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                    Stretch="Fill"
+                    Name="CustomFunctionB"
+                    MouseDown="CustomFunction_OnMouseDown"
+                    MouseMove="CustomFunction_OnMouseMove"
+                    MouseUp="CustomFunction_OnMouseUp"
+                >
+                </Image>
+            </TabItem>
+        </TabControl>
+
+        <CheckBox Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" IsChecked="{Binding CustomFunctionManager.AllSame}">Takie same</CheckBox>
     </Grid>
 </UserControl>

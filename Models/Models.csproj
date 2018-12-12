@@ -70,6 +70,7 @@
     <Compile Include="BitmapManager.cs" />
     <Compile Include="CustomFunction\CustomFunction.cs" />
     <Compile Include="CustomFunction\CustomFunctionBitmap.cs" />
+    <Compile Include="CustomFunction\CustomFunctionManager.cs" />
     <Compile Include="CustomFunction\LineDrawer.cs" />
     <Compile Include="Filters\FilteringArguments.cs" />
     <Compile Include="Filters\FilteringStrategyBase.cs" />

@@ -23,8 +23,7 @@ namespace ViewModels
 
         public HistogramsManager HistogramsManager { get; }
         public FilteringManager FilteringManager { get; }
-        public CustomFunctionBitmap CustomFunctionBitmap { get; set; }
-        public CustomFunction CustomFunction { get; set; }
+        public CustomFunctionManager CustomFunctionManager { get; set; }
         public FilteringArea FilteringArea { get; set; }
         public MainViewModel()
         {
@@ -33,15 +32,14 @@ namespace ViewModels
             BitmapManager = new BitmapManager(HistogramsManager);
             FilteringArea = new FilteringArea(BitmapManager.PixelMap);
             FilteringManager = new FilteringManager(BitmapManager, HistogramsManager,FilteringArea);
-            CustomFunction = new CustomFunction();
-            CustomFunctionBitmap = new CustomFunctionBitmap(CustomFunction);
+            CustomFunctionManager = new CustomFunctionManager();
 
             MenuViewModel = new MenuViewModel(BitmapManager);
             ImageViewModel = new ImageViewModel(BitmapManager, FilteringManager);
-            FiltersViewModel = new FiltersViewModel(FilteringManager,CustomFunction);
+            FiltersViewModel = new FiltersViewModel(FilteringManager,CustomFunctionManager);
             ActionsViewModel = new ActionsViewModel(FilteringManager);
             HistogramsViewModel = new HistogramsViewModel(HistogramsManager);
-            FunctionViewModel = new FunctionViewModel(CustomFunctionBitmap);
+            FunctionViewModel = new FunctionViewModel(CustomFunctionManager);
             
         }
     }

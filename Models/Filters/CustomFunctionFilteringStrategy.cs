@@ -10,16 +10,16 @@ namespace Models.Filters
 {
     public class CustomFunctionFilteringStrategy:FilteringStrategyBase, IFilteringStrategy
     {
-        private CustomFunction.CustomFunction _customFunction;
+        private CustomFunction.CustomFunctionManager _customFunctionManager;
         public void Execute(FilteringArguments filteringArguments)
         {
             Func<Pixel, Pixel> calculate = (pixelS) =>
             {
                 Pixel pixelF = new Pixel();
 
-                pixelF.R = (byte)_customFunction.FunctionTable[pixelS.R];
-                pixelF.G = (byte)_customFunction.FunctionTable[pixelS.G];
-                pixelF.B = (byte)_customFunction.FunctionTable[pixelS.B];
+                pixelF.R = (byte)_customFunctionManager.RChart.Function.FunctionTable[pixelS.R];
+                pixelF.G = (byte)_customFunctionManager.GChart.Function.FunctionTable[pixelS.G];
+                pixelF.B = (byte)_customFunctionManager.BChart.Function.FunctionTable[pixelS.B];
 
                 return pixelF;
             };
@@ -28,9 +28,9 @@ namespace Models.Filters
             
         }
 
-        public CustomFunctionFilteringStrategy(CustomFunction.CustomFunction custom)
+        public CustomFunctionFilteringStrategy(CustomFunction.CustomFunctionManager customManager)
         {
-            _customFunction = custom;
+            _customFunctionManager = customManager;
         }
     }
 }

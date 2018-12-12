@@ -39,19 +39,23 @@ namespace Views
         private void CustomFunction_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             Point mousePoint = e.GetPosition(sender as Image);
-            _functionViewModel.HandleMouseDown(mousePoint,CustomFunction.Width,CustomFunction.Height);
+            Image chart = sender as Image;
+            
+            _functionViewModel.HandleMouseDown(mousePoint,CustomFunctionR.ActualWidth,CustomFunctionR.ActualHeight,chart.Name);
 
         }
 
         private void CustomFunction_OnMouseMove(object sender, MouseEventArgs e)
         {
             Point mousePoint = e.GetPosition(sender as Image);
-            _functionViewModel.HandleMouseMove(mousePoint,CustomFunction.Width, CustomFunction.Height);
+            Image chart = sender as Image;
+            _functionViewModel.HandleMouseMove(mousePoint,CustomFunctionR.ActualWidth, CustomFunctionR.ActualHeight, chart.Name);
         }
 
         private void CustomFunction_OnMouseUp(object sender, MouseButtonEventArgs e)
         {
-            _functionViewModel.HandleMouseUp();
+            Image chart = sender as Image;
+            _functionViewModel.HandleMouseUp(chart.Name);
         }
     }
 }

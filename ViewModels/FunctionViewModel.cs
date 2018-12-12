@@ -13,52 +13,110 @@ namespace ViewModels
 {
     public class FunctionViewModel: ObservableObject
     {
-        public CustomFunctionBitmap CustomFunctionBitmap { get; set; }
-        private ImageSource _imageSource;
-        public ImageSource ImageSource
+        public CustomFunctionManager CustomFunctionManager { get; set; }
+        private ImageSource _imageSourceR;
+        private ImageSource _imageSourceG;
+        private ImageSource _imageSourceB;
+
+        public ImageSource ImageSourceR
         {
-            get { return _imageSource; }
+            get { return _imageSourceR; }
             set
             {
-                _imageSource = value;
-                RaisePropertyChanged("ImageSource");
+                _imageSourceR = value;
+                RaisePropertyChanged("ImageSourceR");
+            }
+        }
+        public ImageSource ImageSourceG
+        {
+            get { return _imageSourceG; }
+            set
+            {
+                _imageSourceG = value;
+                RaisePropertyChanged("ImageSourceG");
+            }
+        }
+        public ImageSource ImageSourceB
+        {
+            get { return _imageSourceB; }
+            set
+            {
+                _imageSourceB = value;
+                RaisePropertyChanged("ImageSourceB");
             }
         }
 
-        public PropertyObserver<CustomFunctionBitmap> FunctionBitmapObserver { get; set; }
+        public PropertyObserver<CustomFunctionBitmap> BitmapRObserver { get; set; }
+        public PropertyObserver<CustomFunctionBitmap> BitmapGObserver { get; set; }
+        public PropertyObserver<CustomFunctionBitmap> BitmapBObserver { get; set; }
 
-        public FunctionViewModel(CustomFunctionBitmap customFunctionBitmap)
+
+        public FunctionViewModel(CustomFunctionManager customFunctionManager)
         {
-            CustomFunctionBitmap = customFunctionBitmap;
+            CustomFunctionManager = customFunctionManager;
             RegisterPropertiesChanged();
-            BitmapChangedHandler(CustomFunctionBitmap);
+            BitmapChangedHandlerR(CustomFunctionManager.RChart);
+
+            BitmapChangedHandlerG(CustomFunctionManager.GChart);
+
+            BitmapChangedHandlerB(CustomFunctionManager.BChart);
         }
 
         public void RegisterPropertiesChanged()
         {
-            FunctionBitmapObserver = new PropertyObserver<CustomFunctionBitmap>(CustomFunctionBitmap)
-                .RegisterHandler(n => n.FunctionPixelMap, BitmapChangedHandler);
+            BitmapRObserver = new PropertyObserver<CustomFunctionBitmap>(CustomFunctionManager.RChart)
+                .RegisterHandler(n => n.FunctionPixelMap, BitmapChangedHandlerR);
+            BitmapGObserver = new PropertyObserver<CustomFunctionBitmap>(CustomFunctionManager.GChart)
+                .RegisterHandler(n => n.FunctionPixelMap, BitmapChangedHandlerG);
+            BitmapBObserver = new PropertyObserver<CustomFunctionBitmap>(CustomFunctionManager.BChart)
+                .RegisterHandler(n => n.FunctionPixelMap, BitmapChangedHandlerB);
         }
 
-        private void BitmapChangedHandler(CustomFunctionBitmap customFunctionBitmap)
+        private void BitmapChangedHandlerR(CustomFunctionBitmap CustomFunctionBitmap)
         {
-            ImageSource = TypesConverters.BitmapToImageSource(customFunctionBitmap.FunctionPixelMap.GetBitmap());
+            ImageSourceR = TypesConverters.BitmapToImageSource(CustomFunctionBitmap.FunctionPixelMap.GetBitmap());
+        }
+        private void BitmapChangedHandlerG(CustomFunctionBitmap CustomFunctionBitmap)
+        {
+            ImageSourceG = TypesConverters.BitmapToImageSource(CustomFunctionBitmap.FunctionPixelMap.GetBitmap());
+        }
+        private void BitmapChangedHandlerB(CustomFunctionBitmap CustomFunctionBitmap)
+        {
+            ImageSourceB = TypesConverters.BitmapToImageSource(CustomFunctionBitmap.FunctionPixelMap.GetBitmap());
         }
 
 
-        public void HandleMouseDown(System.Windows.Point point, double width, double height)
+        public void HandleMouseDown(System.Windows.Point point, double width, double height, string chartName)
         {
-            CustomFunctionBitmap.HandleMouseDown(point,width,height);
+            CustomFunctionBitmap bitmapManager = GetBitmapManager(chartName);
+            bitmapManager.HandleMouseDown(point,width,height);
         }
 
-        public void HandleMouseMove(System.Windows.Point point, double width, double height)
+        public void HandleMouseMove(System.Windows.Point point, double width, double height, string chartName)
         {
-            CustomFunctionBitmap.HandleMouseMove(point, width, height);
+            CustomFunctionBitmap bitmapManager = GetBitmapManager(chartName);
+            bitmapManager.HandleMouseMove(point, width, height);
         }
 
-        public void HandleMouseUp()
+        public void HandleMouseUp(string chartName)
         {
-            CustomFunctionBitmap.HandleMouseUp();
+            CustomFunctionBitmap bitmapManager = GetBitmapManager(chartName);
+            bitmapManager.HandleMouseUp();
+        }
+
+        private CustomFunctionBitmap GetBitmapManager(string chartName)
+        {
+            switch (chartName)
+            {
+                case "CustomFunctionR":
+                    return CustomFunctionManager.RChart;
+                case "CustomFunctionG":
+                    return CustomFunctionManager.GChart;
+                case "CustomFunctionB":
+                    return CustomFunctionManager.BChart;
+                default:
+                    return null;
+            }
         }
     }
 }
