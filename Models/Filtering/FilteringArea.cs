@@ -19,7 +19,7 @@ namespace Models.Filtering
     }
     public class FilteringArea: ObservableObject
     {
-        private PixelMap _pixelMap;
+        public PixelMap Map { get; set; }
         private int _centerX;
         private int _centerY;
         public FilteringMode FilteringMode { get; set; }
@@ -54,7 +54,7 @@ namespace Models.Filtering
 
         public FilteringArea(PixelMap pixelMap)
         {
-            _pixelMap = pixelMap;
+            Map = pixelMap;
             FilteringMode = FilteringMode.Bitmap;
             BrushDelimeter = 40;
             CenterX = 2000;
@@ -80,11 +80,11 @@ namespace Models.Filtering
 
         private IEnumerable<PixelPoint> GetWholeBitmap()
         {
-            for (int i = 0; i < _pixelMap.Width; i++)
+            for (int i = 0; i < Map.Width; i++)
             {
-                for (int j = 0; j < _pixelMap.Height; j++)
+                for (int j = 0; j < Map.Height; j++)
                 {
-                    yield return new PixelPoint(new Point(i,j),_pixelMap[i, j]);
+                    yield return new PixelPoint(new Point(i,j),Map[i, j]);
                 }
             }
         }
@@ -103,7 +103,7 @@ namespace Models.Filtering
                 {
                     if (Math.Sqrt(Math.Pow((CenterX - i), 2) + Math.Pow((CenterY - j), 2)) <= BrushDelimeter / 2)
                     {
-                        yield return new PixelPoint(new Point(i, j), _pixelMap[i, j]);
+                        yield return new PixelPoint(new Point(i, j), Map[i, j]);
                     }
                 }
             }

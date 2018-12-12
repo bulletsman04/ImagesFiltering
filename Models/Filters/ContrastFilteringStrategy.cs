@@ -9,19 +9,16 @@ using PixelMapSharp;
 
 namespace Models.Filters
 {
-    public class ContrastFilteringStrategy: IFilteringStrategy
+    public class ContrastFilteringStrategy: FilteringStrategyBase, IFilteringStrategy
     {
         public void Execute(FilteringArguments filteringArguments)
         {
-            HistogramsManager histogramsManager = filteringArguments.HistogramsManager;
-            foreach (var pixelPoint in filteringArguments.FilteringArea.GetPixelsToFilter())
-            {
-                int contrast = 2;
-                Pixel pixelF = filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
-                Pixel pixelS = filteringArguments.BasicPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
-                
-                Pixel prev = new Pixel(pixelF.R, pixelF.G, pixelF.B);
 
+            Func<Pixel, Pixel> calculate = (pixelS) =>
+            {
+                Pixel pixelF = new Pixel();
+
+                int contrast = 2;
                 byte r = pixelS.R;
                 byte g = pixelS.G;
                 byte b = pixelS.B;
@@ -30,16 +27,16 @@ namespace Models.Filters
                 int gPre = (g - 128) * contrast + 128;
                 int bPre = (b - 128) * contrast + 128;
 
-                
                 pixelF.R = TypesConverters.ConvertIntToByte(rPre);
                 pixelF.G = TypesConverters.ConvertIntToByte(gPre);
                 pixelF.B = TypesConverters.ConvertIntToByte(bPre);
-                histogramsManager.RecalculateTempFromPixel(prev, pixelF);
-                filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y] = pixelF;
 
-            }
-            if (filteringArguments.FilteringArea.FilteringMode != FilteringMode.Brush)
-                histogramsManager.RecalculateFromTemp();
+                return pixelF;
+            };
+
+            base.IterateAndApply(filteringArguments,calculate );
+
+
         }
 
      

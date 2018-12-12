@@ -8,3 +8,4 @@ Ogólne informacje:
 3) Aby zmieniæ filtr wystarczy go wybraæ - przycisk "Zastosuj" nie jest potrzebny i jego dzia³anie opisane 
 jest w pkt 4) 
 4) Przycisk "Zastosuj" stosuje filtr na ca³y obrazek gdy nie jest w³¹czony pêdzel.
+5) Histogramy przeliczaj¹ siê po puszczeniu LPM.

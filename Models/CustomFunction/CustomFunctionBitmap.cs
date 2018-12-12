@@ -28,7 +28,7 @@ namespace Models.CustomFunction
         private int _yOffset;
         private int _yDownOffset;
         private int _xLeftOffset;
-        private int _step = 20;
+        private int _step = 35;
 
 
         private CustomFunction _customFunction;
@@ -114,7 +114,7 @@ namespace Models.CustomFunction
             {
                 Point p = FunctionPointToBitmapPoint(i, _customFunction.FunctionTable[i]);
                 _points.Add(p);
-                _pointsRectangles.Add(new Rectangle(p.X - 3, p.Y - 3, 6, 6));
+                _pointsRectangles.Add(new Rectangle(p.X - 4, p.Y - 4, 8, 8));
 
             }
            
@@ -174,7 +174,7 @@ namespace Models.CustomFunction
             }
 
             _points[_clickedPointIndex] = new Point(x,y);
-            _pointsRectangles[_clickedPointIndex] = new Rectangle(x - 3, y - 3, 6, 6);
+            _pointsRectangles[_clickedPointIndex] = new Rectangle(x - 4, y - 4, 8, 8);
 
             RepaintBitmap();
         }

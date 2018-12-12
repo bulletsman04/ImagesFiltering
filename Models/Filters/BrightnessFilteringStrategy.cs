@@ -8,19 +8,15 @@ using PixelMapSharp;
 
 namespace Models.Filters
 {
-    public class BrightnessFilteringStrategy:IFilteringStrategy
+    public class BrightnessFilteringStrategy: FilteringStrategyBase, IFilteringStrategy
     {
         public void Execute(FilteringArguments filteringArguments)
         {
-            HistogramsManager histogramsManager = filteringArguments.HistogramsManager;
-            foreach (var pixelPoint in filteringArguments.FilteringArea.GetPixelsToFilter())
+            Func<Pixel, Pixel> calculate = (pixelS) =>
             {
-                int brightenessAdded = 100;
-                Pixel pixelF = filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
-                Pixel pixelS = filteringArguments.BasicPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y];
+                Pixel pixelF = new Pixel();
 
-                
-                Pixel prev = new Pixel(pixelF.R, pixelF.G, pixelF.B);
+                int brightenessAdded = 100;
                 byte r = pixelS.R;
                 byte g = pixelS.G;
                 byte b = pixelS.B;
@@ -34,12 +30,12 @@ namespace Models.Filters
                 pixelF.G = TypesConverters.ConvertIntToByte(gPre);
                 pixelF.B = TypesConverters.ConvertIntToByte(bPre);
 
-                histogramsManager.RecalculateTempFromPixel(prev, pixelF);
-                filteringArguments.FilteredPixelMap[pixelPoint.Point.X, pixelPoint.Point.Y] = pixelF;
+                return pixelF;
+            };
 
-            }
-            if(filteringArguments.FilteringArea.FilteringMode != FilteringMode.Brush)
-                histogramsManager.RecalculateFromTemp();
+            base.IterateAndApply(filteringArguments, calculate);
+
+            
         }
     }
 }

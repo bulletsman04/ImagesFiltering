@@ -49,6 +49,7 @@ namespace Models
         { 
             _filteringArguments.FilteredPixelMap = _bitmapManager.PixelMap;
             _filteringArguments.BasicPixelMap = _bitmapManager.StartingPixelMap;
+            FilteringArea.Map = _bitmapManager.StartingPixelMap;
 
             if (FilteringStrategy != null)
             {
