@@ -15,8 +15,6 @@
         <TabControl>
             <TabItem Header="R">
                 <Image 
-                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type TabItem}, Mode=FindAncestor}}" 
-                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type TabItem}, Mode=FindAncestor}}" 
                     Source="{Binding ImageSourceR, Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                     Stretch="Fill"
                     Name="CustomFunctionR"
@@ -28,8 +26,6 @@
             </TabItem>
             <TabItem Header="G">
                 <Image 
-                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type TabItem}, Mode=FindAncestor}}" 
-                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type TabItem}, Mode=FindAncestor}}" 
                     Source="{Binding ImageSourceG, Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                     Stretch="Fill"
                     Name="CustomFunctionG"
@@ -41,8 +37,6 @@
             </TabItem>
             <TabItem Header="B">
                 <Image 
-                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type TabItem}, Mode=FindAncestor}}" 
-                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type TabItem}, Mode=FindAncestor}}" 
                     Source="{Binding ImageSourceB, Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                     Stretch="Fill"
                     Name="CustomFunctionB"
