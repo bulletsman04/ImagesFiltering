@@ -49,8 +49,9 @@ namespace Views
                 int delimeter = (int) Brush.Width;
                 Canvas.SetLeft(Brush, mousePoint.X - delimeter / 2);
                 Canvas.SetTop(Brush, mousePoint.Y - delimeter / 2);
+                Point mousePointToImage = e.GetPosition(Area);
 
-                _imageViewModel.HandleMouseMove(mousePoint, Area.ActualWidth, Area.ActualHeight);
+                _imageViewModel.HandleMouseMove(mousePointToImage, Area.ActualWidth, Area.ActualHeight);
             }
             else
             {

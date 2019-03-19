@@ -13,7 +13,7 @@
             <Image 
             Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Canvas}, Mode=FindAncestor}}" 
             Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type Canvas}, Mode=FindAncestor}}" 
-                VerticalAlignment="Top" HorizontalAlignment="Left"
+                VerticalAlignment="Center" HorizontalAlignment="Center"
             Source="{Binding ImageSource, Mode=OneWay}" Name="Area"
             Stretch="Uniform"
                 MouseDown="Image_OnMouseDown"

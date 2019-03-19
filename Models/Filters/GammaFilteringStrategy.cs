@@ -25,7 +25,7 @@ namespace Models.Filters
                 return pixelF;
             };
 
-            base.IterateAndApply(filteringArguments, calculate);
+            IterateAndApply(filteringArguments, calculate);
 
            
         }

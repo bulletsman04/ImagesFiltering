@@ -10,3 +10,5 @@ jest w pkt 4)
 4) Przycisk "Zastosuj" stosuje filtr na ca³y obrazek gdy nie jest w³¹czony pêdzel.
 5) Histogramy przeliczaj¹ siê po puszczeniu LPM.
 6) Filtry nie nak³adaj¹ siê
+7) Przy wykresach w³asnej funkcji filtruj¹cej przy wybraniu opcji "Takie same" wykresy dopasowuj¹ siê do wykresu R.
+   Po ka¿dej zmianie wykresu R trzeba jeszcze raz zaznaczyæ checkbox ¿eby pozosta³e wykresy dopasowa³y siê. 
